@@ -1,8 +1,12 @@
 const express = require("express");
 const app = express();
 let http = require("http");
+let ejs=require("ejs");
 let socketio = require("socket.io");
 
+app.set("view engine", "ejs");
+
+app.use(express.static("public"));
 let server = http.createServer(app);
 let io=new socketio.Server(server,{
 	cors:{
@@ -22,7 +26,7 @@ io.on("connection",function(connection) {
     });
 })
 app.get("/", (req, res, next) => {
-  res.send("<h1>Hello world<h1>");
+  res.send("index.html");
 });
 
 server.listen(app.get("port"), () => {

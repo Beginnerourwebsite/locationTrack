@@ -26,7 +26,7 @@ io.on("connection",function(connection) {
     });
 })
 app.get("/", (req, res, next) => {
-  res.render("index.html");
+  res.render("index");
 });
 
 server.listen(app.get("port"), () => {

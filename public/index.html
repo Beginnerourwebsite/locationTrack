@@ -26,7 +26,7 @@
   <body>
     <div id="map" style="width: 100%; height: 500px"></div>
     <script>
-      let oi = io("https://location-track-tau.vercel.app/");
+      let oi = io("https://location-track-tau.vercel.app");
       oi.on("connect", function () {
         console.log("connection established");
       });
@@ -40,36 +40,36 @@
       }
 
       // Initialize Leaflet map
-      let map = L.map("map").setView([28.8826571, 76.5740597], 15);
-      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 20,
-		  attribution:"pankaj",
-        minZoom: 2,
-        tileSize: 512,
-        zoomOffset: -1,
-      }).addTo(map);
+    //   let map = L.map("map").setView([28.8826571, 76.5740597], 15);
+    //   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    //     maxZoom: 20,
+	// 	  attribution:"pankaj",
+    //     minZoom: 2,
+    //     tileSize: 512,
+    //     zoomOffset: -1,
+    //   }).addTo(map);
 
       // Listen for location updates and place markers on the map
       oi.on("chat", function (chat) {
         let [latitude, longitude] = chat; // Get coordinates from the chat event
+console.log(chat)
+        // // Define a custom icon
+        // let iconOption = {
+        //   iconUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Leaflet_marker_icon.png", // A simple example image
+        //   iconSize: [32, 32], // Size of the icon (adjust as necessary)
+        //   iconAnchor: [16, 32], // Point of the icon that will be at the marker's location
+        //   popupAnchor: [0, -32], // Point from which the popup should open
+        // };
 
-        // Define a custom icon
-        let iconOption = {
-          iconUrl: "https://upload.wikimedia.org/wikipedia/commons/a/a7/Leaflet_marker_icon.png", // A simple example image
-          iconSize: [32, 32], // Size of the icon (adjust as necessary)
-          iconAnchor: [16, 32], // Point of the icon that will be at the marker's location
-          popupAnchor: [0, -32], // Point from which the popup should open
-        };
+        // let ourCustomIcon = L.icon(iconOption);
 
-        let ourCustomIcon = L.icon(iconOption);
-
-        // Create a marker at the received latitude and longitude
-        let marker = L.marker([latitude, longitude])
-          .bindPopup("<h3>Location Update</h3><p>Latitude: " + latitude + "<br>Longitude: " + longitude + "</p>")
-          .on('click', () => {
-            map.flyTo([latitude, longitude], 15); // Zoom in on marker on click
-          })
-          .addTo(map);
+        // // Create a marker at the received latitude and longitude
+        // let marker = L.marker([latitude, longitude])
+        //   .bindPopup("<h3>Location Update</h3><p>Latitude: " + latitude + "<br>Longitude: " + longitude + "</p>")
+        //   .on('click', () => {
+        //     map.flyTo([latitude, longitude], 15); // Zoom in on marker on click
+        //   })
+        //   .addTo(map);
       });
     </script>
   </body>
